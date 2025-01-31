@@ -5,8 +5,15 @@ prints them in a list starting from the closest, and includes the status of whet
 The output looks like this:
 
 <p align="center">
-  <img src="docs/output.png" alt="Screenshot showing the output" />
+  <img src="docs/output.png" alt="Screenshot showing the text-based output" />
 </p>
+
+It also generates a KML file that you can view in Google Earth:
+
+<p align="center">
+  <img src="docs/kml.png" alt="Screenshot showing the KML output" />
+</p>
+
 
 ## What?
 
@@ -94,6 +101,9 @@ or:
 ```bash
 pota-local-progress 20 M0TRT 50.71407 -1.87479
 ```
+
+The output will be written to the terminal window. The script will also create `pota-local-progress.kml` for you to view
+in e.g. Google Earth.
 
 > [!WARNING]
 > Always do your own research to find out if it is possible and legal to activate a park, regardless of whether it appears

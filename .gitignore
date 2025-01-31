@@ -163,3 +163,4 @@ cython_debug/
 
 /.idea
 /pota-local-progress-cache.sqlite
+/pota-local-progress.kml

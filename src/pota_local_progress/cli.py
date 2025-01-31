@@ -10,6 +10,7 @@ from datetime import timedelta
 
 import great_circle_calculator.great_circle_calculator as gcc
 import maidenhead as mh
+import simplekml
 from requests_cache import CachedSession
 
 
@@ -72,6 +73,9 @@ def main():
                 park["properties"]["activated"] = True
                 break
 
+    # Create KML object to fill with parks
+    kml = simplekml.Kml()
+
     # Write output
     print("The closest " + str(num_parks) + " parks to " + callsign + " QTH at " + location_string + " are:")
     print("  Status  | Distance | Reference | Name")
@@ -83,6 +87,15 @@ def main():
         print(status_text_ansi + " | "
             + ("{:.1f}".format(park["properties"]["distance_from_home"]) + " km").rjust(8) + " | "
             + park["properties"]["reference"].center(9) + " | " + limited_len_name)
+
+        kml_color = "ff00cc00" if park["properties"]["activated"] else "ff0000cc"
+        pnt = kml.newpoint(name="",
+                           description=park["properties"]["name"] + "<br/>https://pota.app/#/park/" +
+                                       park["properties"]["reference"],
+                           coords=[(park["geometry"]["coordinates"][0], park["geometry"]["coordinates"][1])])
+        pnt.style.iconstyle.color = kml_color
+
+    kml.save("pota-local-progress.kml")
 
 if __name__ == "__main__":
     main()
